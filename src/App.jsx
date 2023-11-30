@@ -1,8 +1,14 @@
 import { useState } from "react";
-import Home from "./pages/Home";
+import { HashRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Router from "./Router";
 
 function App() {
-  return <Home />;
+  return (
+    <HashRouter>
+      <Router />
+    </HashRouter>
+  );
 }
 
 export default App;
