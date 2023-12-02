@@ -12,18 +12,13 @@ import { Bar } from "react-chartjs-2";
 import DataBoxes from "../components/DataBoxes";
 import RateButtons from "../components/RateButtons";
 import Comments from "../components/Comments";
-import { FaGear, FaHouse } from "react-icons/fa6";
-import {
-  FaCalendar,
-  FaCalendarAlt,
-  FaStarHalf,
-  FaStarHalfAlt,
-} from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
+import { FaCalendarAlt, FaStarHalfAlt } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
 import { useNavigate } from "react-router";
 import Foto from "../assets/images/foto.png";
 
-// import DashNavbar from "../components/DashNavbar";
+// import SideNavbar from "../components/SideNavbar";
 
 export default function Dashboard() {
   const [citiesData, setCitiesData] = useState({
@@ -204,7 +199,7 @@ export default function Dashboard() {
     <main className="flex justify-center items-center bg-[url('./assets/images/partyup-background.png')] bg-cover bg-no-repeat min-h-screen">
       <div className="relative px-32 pt-4 pb-20 flex flex-col items-center bg-[#2A0127] bg-opacity-80 border border-[#E579FF]">
         <div className="absolute flex gap-3 left-4">
-          <button onClick={() => navigate("/")}>
+          <button onClick={() => navigate("/eventos")}>
             <FaHouse size={30} color="#E579FF" />
           </button>
           <GoGear size={30} color="#E579FF" />
@@ -216,7 +211,7 @@ export default function Dashboard() {
         </div>
         <div className="flex mt-20">
           <div>
-            {/* <DashNavbar /> */}
+            {/* <SideNavbar /> */}
             <DataBoxes />
             <RateButtons
               citiesData={citiesData}
