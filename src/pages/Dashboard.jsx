@@ -19,6 +19,7 @@ import {
   FaStarHalf,
   FaStarHalfAlt,
 } from "react-icons/fa";
+import { GoGear } from "react-icons/go";
 import { useNavigate } from "react-router";
 import Foto from "../assets/images/foto.png";
 
@@ -206,7 +207,7 @@ export default function Dashboard() {
           <button onClick={() => navigate("/")}>
             <FaHouse size={30} color="#E579FF" />
           </button>
-          <FaGear size={30} color="#E579FF" />
+          <GoGear size={30} color="#E579FF" />
         </div>
         <img src={Foto} width={100} className="absolute rounded-full right-8" />
         <div className="flex items-center gap-4">
@@ -228,7 +229,7 @@ export default function Dashboard() {
               <Bar options={options} data={data} width={700} height={300} />
             </div>
           </div>
-          <div>
+          <div className="mt-auto">
             <div className="flex items-center justify-center gap-2 m-auto mb-5">
               <FaStarHalfAlt size={40} color="#C864E0" />
               <span className="text-3xl font-bold text-white">4,2</span>
