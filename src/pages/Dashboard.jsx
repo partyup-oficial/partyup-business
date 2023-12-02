@@ -10,15 +10,45 @@ import {
 import { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import DataBoxes from "../components/DataBoxes";
+import RateButtons from "../components/RateButtons";
+import Comments from "../components/Comments";
+import { FaGear, FaHouse } from "react-icons/fa6";
+import {
+  FaCalendar,
+  FaCalendarAlt,
+  FaStarHalf,
+  FaStarHalfAlt,
+} from "react-icons/fa";
+import { useNavigate } from "react-router";
+import Foto from "../assets/images/foto.png";
+
 // import DashNavbar from "../components/DashNavbar";
 
 export default function Dashboard() {
   const [citiesData, setCitiesData] = useState({
-    labels: ["Santos", "São Vicente", "Praia Grande"],
+    labels: [
+      "Santos",
+      "São Vicente",
+      "Praia Grande",
+      "Cubatão",
+      "Bertioga",
+      "São Paulo",
+      "Salvador",
+      "Guarujá",
+      "Campinas",
+      "Belo Horizonte",
+    ],
     data: [
       { x: 0, y: 185 },
       { x: 0, y: 32 },
       { x: 0, y: 109 },
+      { x: 0, y: 109 },
+      { x: 0, y: 159 },
+      { x: 0, y: 309 },
+      { x: 0, y: 109 },
+      { x: 0, y: 32 },
+      { x: 0, y: 109 },
+      { x: 0, y: 10 },
     ],
     title: "Cidades",
   });
@@ -149,7 +179,7 @@ export default function Dashboard() {
       x: {
         ticks: {
           font: {
-            size: 16,
+            size: 14,
           },
           color: "#ffffff",
         },
@@ -167,30 +197,44 @@ export default function Dashboard() {
       },
     ],
   };
+
+  const navigate = useNavigate();
   return (
     <main className="flex justify-center items-center bg-[url('./assets/images/partyup-background.png')] bg-cover bg-no-repeat min-h-screen">
-      <div className="flex flex-col justify-center items-center gap-4 bg-[#2A0127] bg-opacity-80 border border-[#E579FF]">
-        {/* <DashNavbar /> */}
-        <DataBoxes />
-        <div className="flex justify-center gap-8 text-2xl font-normal text-white">
-          <button
-            onClick={() => setBtn(citiesData)}
-            className="bg-[#78247A] rounded-3xl px-12 py-2">
-            Cidades
+      <div className="relative px-32 pt-4 pb-20 flex flex-col items-center bg-[#2A0127] bg-opacity-80 border border-[#E579FF]">
+        <div className="absolute flex gap-3 left-4">
+          <button onClick={() => navigate("/")}>
+            <FaHouse size={30} color="#E579FF" />
           </button>
-          <button
-            onClick={() => setBtn(hourData)}
-            className="bg-[#78247A] rounded-3xl px-12 py-2">
-            Horários
-          </button>
-          <button
-            onClick={() => setBtn(weekData)}
-            className="bg-[#78247A] rounded-3xl px-12 py-2">
-            Dias da semana
-          </button>
+          <FaGear size={30} color="#E579FF" />
         </div>
-        <div className="p-10 bg-black border-2 border-purple-500 bg-opacity-60 rounded-[3rem]">
-          <Bar options={options} data={data} width={600} height={300} />
+        <img src={Foto} width={100} className="absolute rounded-full right-8" />
+        <div className="flex items-center gap-4">
+          <FaCalendarAlt size={30} color="#E579FF" />
+          <h1 className="text-4xl font-bold text-yellow-500">Nome do evento</h1>
+        </div>
+        <div className="flex mt-20">
+          <div>
+            {/* <DashNavbar /> */}
+            <DataBoxes />
+            <RateButtons
+              citiesData={citiesData}
+              hourData={hourData}
+              weekData={weekData}
+              setBtn={setBtn}
+              btn={btn}
+            />
+            <div className="p-5 bg-black border-2 border-purple-500 bg-opacity-60 rounded-[2rem] mt-6">
+              <Bar options={options} data={data} width={700} height={300} />
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center justify-center gap-2 m-auto mb-5">
+              <FaStarHalfAlt size={40} color="#C864E0" />
+              <span className="text-3xl font-bold text-white">4,2</span>
+            </div>
+            <Comments />
+          </div>
         </div>
       </div>
     </main>

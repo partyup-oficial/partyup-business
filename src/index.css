@@ -8,3 +8,16 @@
   outline: none;
   background: url("../assets/images/foto.png");
 }
+
+.comments-rate-dashboard::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.comments-rate-dashboard::-webkit-scrollbar-track {
+  background-color: rgb(60, 9, 60);
+}
+
+.comments-rate-dashboard::-webkit-scrollbar-thumb {
+  background-color: purple;
+  border-radius: 9999px;
+}
