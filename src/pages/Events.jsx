@@ -9,13 +9,13 @@ export default function Events() {
   const navigate = useNavigate();
   return (
     <main className="bg-[url('./assets/images/partyup-background.png')] bg-cover bg-no-repeat">
-      <div className="bg-black bg-opacity-40">
+      <div className="bg-black bg-opacity-60">
         <SideNavbar
           setSelectedEvents={setSelectedEvents}
           selectedEvents={selectedEvents}
         />
         <div className="ml-[28rem] pt-12 min-h-screen">
-          <div className="flex items-center justify-between pr-16">
+          <div className="flex items-center justify-between pb-6 pr-16">
             <h1 className="text-4xl font-bold text-orange-300">
               {selectedEvents}
             </h1>
@@ -37,8 +37,12 @@ export default function Events() {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap h-screen gap-12 mt-12 overflow-y-scroll custom-scroll">
-            {Array(22)
+          <div
+            // onScroll={() => {
+            //   document.body.style.overflow = "hidden";
+            // }}
+            className="flex flex-wrap h-[50rem] gap-12 py-12 overflow-y-scroll custom-scroll">
+            {Array(10)
               .fill("")
               .map(() => (
                 <div
