@@ -22,3 +22,8 @@
   background-color: purple;
   border-radius: 9999px;
 }
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}

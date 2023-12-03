@@ -7,11 +7,11 @@ import { MdEditCalendar } from "react-icons/md";
 export default function SideNavbar({ setSelectedEvents, selectedEvents }) {
   const navigate = useNavigate();
   return (
-    <div className="fixed z-10 left-0 min-h-screen bg-[#4c0b38] border border-purple-400 rounded-tr-[4rem] rounded-br-[4rem]">
+    <div className="fixed z-10 left-0 min-h-screen bg-[#4c0b38] border-r-2 border-purple-800 rounded-tr-[4rem] rounded-br-[4rem]">
       <div className="flex flex-col items-center py-4">
         <img src={Foto} alt="foto" width={130} className="rounded-full" />
         <div className="text-xl text-[#FFC896]">
-          <div className="flex flex-col mt-6 border-t-2 border-purple-500">
+          <div className="flex flex-col mt-6 border-t border-purple-500">
             <button
               onClick={() => setSelectedEvents("Eventos em andamento")}
               className={`py-5 flex items-center gap-4 pl-4 hover:bg-[#2F0321] pr-28 ${
@@ -29,7 +29,7 @@ export default function SideNavbar({ setSelectedEvents, selectedEvents }) {
               <h1>Eventos encerrados</h1>
             </button>
           </div>
-          <div className="flex flex-col border-t-2 border-purple-500">
+          <div className="flex flex-col border-t border-purple-500">
             <button
               onClick={() => setSelectedEvents("Eventos privados")}
               className={`py-5 flex items-center gap-4 pl-4 hover:bg-[#2F0321] ${

@@ -2,12 +2,16 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import LandingImage from "../assets/images/dashboard-landing.png";
 import PartyupBusiness from "../assets/images/partyup-business.png";
+import { useNavigate } from "react-router";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-[#2A0127]">
       <Navbar />
-      <button className="absolute top-0 p-32 text-3xl text-white -translate-x-24 rounded-full bg-[#460267] -translate-y-40">
+      <button
+        onClick={() => navigate("/login")}
+        className="absolute top-0 p-32 text-3xl text-white -translate-x-24 rounded-full bg-[#460267] -translate-y-40">
         <span className="absolute left-32 top-44">Login</span>
       </button>
 
