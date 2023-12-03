@@ -15,6 +15,11 @@ export default function Navbar() {
           Meus eventos
         </button>
         <button className="font-medium text-white">Planos</button>
+        <button
+          onClick={() => navigate("/login")}
+          className="font-medium text-white">
+          Login
+        </button>
         <img src={Logo} width={60} />
       </div>
     </div>

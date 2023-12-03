@@ -3,14 +3,18 @@ import { GoEye, GoEyeClosed, GoLock, GoMail } from "react-icons/go";
 import Logo from "../assets/logo.svg";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { Waveform } from "@uiball/loaders";
 import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
   const [pass, setPass] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
+  const [invalid, setInvalid] = useState(false);
 
   const onSubmit = (data) => {
+    setLoading(true);
     axios
       .post("http://localhost:3003/loginUser", {
         emailUser: data.email,
@@ -22,6 +26,10 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err);
+        setInvalid(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -55,13 +63,27 @@ export default function Login() {
               className="w-full px-4"
               placeholder="Senha"
             />
-            <button onClick={() => setPass(!pass)}>
+            <button type="button" onClick={() => setPass(!pass)}>
               {pass ? <GoEyeClosed size={30} /> : <GoEye size={30} />}
             </button>
           </div>
           <button className="px-20 py-3 bg-[#95003F] rounded-xl shadow-2xl">
-            Entrar
+            {loading ? (
+              <Waveform
+                size={30}
+                lineWeight={4.2}
+                color="#3f001a"
+                speed={0.8}
+              />
+            ) : (
+              "Entrar"
+            )}
           </button>
+          {invalid && (
+            <span className="-mt-6 text-2xl text-red-700">
+              E-mail ou senha incorretos.
+            </span>
+          )}
         </form>
       </div>
     </main>
