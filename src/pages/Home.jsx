@@ -27,7 +27,7 @@ export default function Home() {
 
       <div className="flex flex-col items-center py-12">
         <h1 className="text-3xl font-bold text-purple-300 text-border-pink-400 text-border-size-[16px]">
-          Conheça o Party Up : O melhor lugar para seus eventos!!!
+          Conheça o Party Up : O melhor lugar para seus eventos!
         </h1>
         <div className="flex items-center justify-between gap-32 px-20 mt-12">
           <img src={PcPhone} width={600} />

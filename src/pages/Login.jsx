@@ -50,7 +50,7 @@ export default function Login() {
             <GoMail size={30} color="#FFF" />
             <input
               {...register("email")}
-              type="email"
+              type="text"
               className="w-full px-4"
               placeholder="E-mail"
             />
