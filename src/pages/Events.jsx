@@ -15,6 +15,7 @@ export default function Events() {
     axios
       .get("http://localhost:3003/viewEventsProgress")
       .then((e) => {
+        console.log(e);
         const getEvents = e.data.results.map((e) => ({
           id: e.Id_App_Events,
           desc: e.desc_event,

@@ -225,12 +225,14 @@ export default function Dashboard() {
           </button>
           <GoGear size={30} color="#E579FF" />
         </div>
-        <img src={Foto} width={100} className="absolute rounded-full right-8" />
-        <div className="flex items-center gap-4">
+        <img src={Foto} width={150} className="absolute rounded-full right-36 top-8" />
+        <div className="flex items-center">
           <FaCalendarAlt size={30} color="#E579FF" />
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-yellow-500 mx-4">
             {eventData.name}
           </h1>
+          <FaStarHalfAlt size={30} color="#C864E0" />
+          <span className="text-2xl text-white ml-2">4,2</span>
         </div>
         <div className="flex mt-20">
           <div>
@@ -248,10 +250,6 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="mt-auto">
-            <div className="flex items-center justify-center gap-2 m-auto mb-5">
-              <FaStarHalfAlt size={40} color="#C864E0" />
-              <span className="text-3xl font-bold text-white">4,2</span>
-            </div>
             <Comments />
           </div>
         </div>
