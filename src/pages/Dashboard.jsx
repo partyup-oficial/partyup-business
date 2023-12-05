@@ -7,7 +7,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import DataBoxes from "../components/DataBoxes";
 import RateButtons from "../components/RateButtons";
@@ -15,12 +16,32 @@ import Comments from "../components/Comments";
 import { FaHouse } from "react-icons/fa6";
 import { FaCalendarAlt, FaStarHalfAlt } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import Foto from "../assets/images/foto.png";
 
 // import SideNavbar from "../components/SideNavbar";
 
 export default function Dashboard() {
+  const location = useLocation();
+  const [eventData, setEventData] = useState({});
+  useEffect(() => {
+    console.log(location.state.id);
+    axios
+      .get(`http://localhost:3003/viewEvent/${location.state.id}`)
+      .then((e) => {
+        console.log(e);
+        setEventData({
+          name: e.data[0].Nm_event,
+          desc: e.data[0].desc_event,
+          image: e.data[0].Event_image,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setEventData([]);
+      });
+  }, []);
+
   const [citiesData, setCitiesData] = useState({
     labels: [
       "Santos",
@@ -207,7 +228,9 @@ export default function Dashboard() {
         <img src={Foto} width={100} className="absolute rounded-full right-8" />
         <div className="flex items-center gap-4">
           <FaCalendarAlt size={30} color="#E579FF" />
-          <h1 className="text-4xl font-bold text-yellow-500">Nome do evento</h1>
+          <h1 className="text-4xl font-bold text-yellow-500">
+            {eventData.name}
+          </h1>
         </div>
         <div className="flex mt-20">
           <div>

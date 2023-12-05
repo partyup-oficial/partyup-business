@@ -8,12 +8,15 @@ import { useNavigate } from "react-router";
 export default function Events() {
   const [selectedEvents, setSelectedEvents] = useState("Eventos em andamento");
   const [eventData, setEventData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [applySearch, setApplySearch] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:3003/viewEventsProgress")
       .then((e) => {
         const getEvents = e.data.results.map((e) => ({
+          id: e.Id_App_Events,
           desc: e.desc_event,
           image: e.Event_image,
         }));
@@ -40,11 +43,16 @@ export default function Events() {
             <div className="relative w-[50rem]">
               <input
                 type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Realize sua busca aqui"
                 className="w-full pl-20 border border-[#E579FF] rounded-md text-white text-xl px-2 placeholder-neutral-500 py-2"
               />
               <div className="absolute flex items-center left-4 pr-4 top-0 border-r h-full border-[#E579FF]">
-                <button>
+                <button
+                  onClick={() => {
+                    setApplySearch(search);
+                  }}>
                   <MdSearch size={35} color="#E579FF" />
                 </button>
               </div>
@@ -61,13 +69,15 @@ export default function Events() {
             // }}
 
             className="flex flex-wrap h-[50rem] gap-12 gap-y-0 py-12 overflow-y-scroll custom-scroll">
-            {eventData.length > 0 ? (
+            {eventData.length > 0 &&
+            eventData.filter((e) => e.desc.includes(applySearch)).length > 0 ? (
               eventData
-                // Array(8)
-                //   .fill("")
+                .filter((e) => e.desc.includes(applySearch))
                 .map((e) => (
                   <div
-                    onClick={() => navigate("/dashboard")}
+                    onClick={() =>
+                      navigate("/dashboard", { state: { id: e.id } })
+                    }
                     className="h-[12rem] w-[20rem] cursor-pointer relative group overflow-hidden">
                     <div className="z-10 relative h-full bg-gradient-to-t from-[rgba(0,0,0,0.9)] to-transparent transition duration-1000 ease-in-out hover:!from-[rgb(0,0,0)]">
                       <span className="absolute bottom-0 p-2 text-sm font-medium text-white transition duration-300 ease-in-out group-hover:-translate-y-3">
@@ -77,7 +87,7 @@ export default function Events() {
                     <img
                       src={`data:image/png;base64,${e.image}`}
                       alt=""
-                      className="h-[12rem] w-[20rem] object-cover cursor-pointer bg-red-500 absolute top-0 group-hover:scale-110 transition-all ease-in-out duration-300"
+                      className="h-[12rem] w-[20rem] object-cover cursor-pointer absolute top-0 group-hover:scale-110 transition-all ease-in-out duration-300"
                     />
                   </div>
                 ))
