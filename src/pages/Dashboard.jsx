@@ -24,23 +24,6 @@ import Foto from "../assets/images/foto.png";
 export default function Dashboard() {
   const location = useLocation();
   const [eventData, setEventData] = useState({});
-  useEffect(() => {
-    console.log(location.state.id);
-    axios
-      .get(`http://localhost:3003/viewEvent/${location.state.id}`)
-      .then((e) => {
-        console.log(e);
-        setEventData({
-          name: e.data[0].Nm_event,
-          desc: e.data[0].desc_event,
-          image: e.data[0].Event_image,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        setEventData([]);
-      });
-  }, []);
 
   const [citiesData, setCitiesData] = useState({
     labels: [
@@ -147,6 +130,39 @@ export default function Dashboard() {
     ],
     title: "Horários",
   });
+  useEffect(() => {
+    console.log(location.state.id);
+    axios
+      .get(`http://localhost:3003/viewEvent/${location.state.id}`)
+      .then((e) => {
+        console.log(e);
+        setEventData({
+          name: e.data[0].Nm_event,
+          desc: e.data[0].desc_event,
+          image: e.data[0].Event_image,
+        });
+        axios.get(`http://localhost:3003/dashboardDaysLike/1`).then((e) => {
+          console.log(e);
+          setWeekData({
+            ...weekData,
+            data: [
+              { x: 0, y: e.data.viewdayLike[0] },
+              { x: 0, y: e.data.viewdayLike[1] },
+              { x: 0, y: e.data.viewdayLike[2] },
+              { x: 0, y: e.data.viewdayLike[3] },
+              { x: 0, y: e.data.viewdayLike[4] },
+              { x: 0, y: e.data.viewdayLike[5] },
+              { x: 0, y: e.data.viewdayLike[6] },
+            ],
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setEventData([]);
+      });
+  }, []);
+
   const [btn, setBtn] = useState(citiesData);
 
   ChartJS.register(
@@ -225,14 +241,18 @@ export default function Dashboard() {
           </button>
           <GoGear size={30} color="#E579FF" />
         </div>
-        <img src={Foto} width={150} className="absolute rounded-full right-36 top-8" />
+        <img
+          src={Foto}
+          width={150}
+          className="absolute rounded-full right-36 top-8"
+        />
         <div className="flex items-center">
           <FaCalendarAlt size={30} color="#E579FF" />
-          <h1 className="text-4xl font-bold text-yellow-500 mx-4">
+          <h1 className="mx-4 text-4xl font-bold text-yellow-500">
             {eventData.name}
           </h1>
           <FaStarHalfAlt size={30} color="#C864E0" />
-          <span className="text-2xl text-white ml-2">4,2</span>
+          <span className="ml-2 text-2xl text-white">4,2</span>
         </div>
         <div className="flex mt-20">
           <div>
