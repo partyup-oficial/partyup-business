@@ -24,6 +24,7 @@ import Foto from "../assets/images/foto.png";
 export default function Dashboard() {
   const location = useLocation();
   const [eventData, setEventData] = useState({});
+  const [dataTrigger, setDataTrigger] = useState("likes");
 
   const [citiesData, setCitiesData] = useState({
     labels: [
@@ -131,37 +132,78 @@ export default function Dashboard() {
     title: "Horários",
   });
   useEffect(() => {
-    console.log(location.state.id);
+    console.log(location.state);
+    setEventData({
+      name: location.state.name,
+    });
     axios
-      .get(`http://localhost:3003/viewEvent/${location.state.id}`)
+      .get(`http://localhost:3003/dashboardDaysLike/${location.state.id}`)
       .then((e) => {
         console.log(e);
-        setEventData({
-          name: e.data[0].Nm_event,
-          desc: e.data[0].desc_event,
-          image: e.data[0].Event_image,
-        });
-        axios.get(`http://localhost:3003/dashboardDaysLike/1`).then((e) => {
-          console.log(e);
-          setWeekData({
-            ...weekData,
-            data: [
-              { x: 0, y: e.data.viewdayLike[0] },
-              { x: 0, y: e.data.viewdayLike[1] },
-              { x: 0, y: e.data.viewdayLike[2] },
-              { x: 0, y: e.data.viewdayLike[3] },
-              { x: 0, y: e.data.viewdayLike[4] },
-              { x: 0, y: e.data.viewdayLike[5] },
-              { x: 0, y: e.data.viewdayLike[6] },
-            ],
-          });
+        setWeekData({
+          ...weekData,
+          data: [
+            { x: 0, y: e.data.viewdayLike[0] },
+            { x: 0, y: e.data.viewdayLike[1] },
+            { x: 0, y: e.data.viewdayLike[2] },
+            { x: 0, y: e.data.viewdayLike[3] },
+            { x: 0, y: e.data.viewdayLike[4] },
+            { x: 0, y: e.data.viewdayLike[5] },
+            { x: 0, y: e.data.viewdayLike[6] },
+          ],
         });
       })
       .catch((err) => {
         console.log(err);
-        setEventData([]);
+        setWeekData({});
       });
-  }, []);
+    axios
+      .get(`http://localhost:3003/dashboardDaysLike/${location.state.id}`)
+      .then((e) => {
+        console.log(e);
+        setHourData({
+          ...hourData,
+          data: [
+            { x: 0, y: e.data.viewdayLike[0] },
+            { x: 0, y: e.data.viewdayLike[1] },
+            { x: 0, y: e.data.viewdayLike[2] },
+            { x: 0, y: e.data.viewdayLike[3] },
+            { x: 0, y: e.data.viewdayLike[4] },
+            { x: 0, y: e.data.viewdayLike[5] },
+            { x: 0, y: e.data.viewdayLike[6] },
+          ],
+        });
+      })
+      .catch((err) => {
+        console.log("deu erro");
+        setHourData({});
+      });
+    axios
+      .get(
+        `http://localhost:3003/${
+          dataTrigger === "likes" ? "dashboardDaysLike" : dataTrigger === "presencas" ? "dashboardLikeHour" : "dashboardLikeHour"
+        }/${location.state.id}`
+      )
+      .then((e) => {
+        console.log(e);
+        setCitiesData({
+          ...citiesData,
+          data: [
+            { x: 0, y: e.data.viewdayLike[0] },
+            { x: 0, y: e.data.viewdayLike[1] },
+            { x: 0, y: e.data.viewdayLike[2] },
+            { x: 0, y: e.data.viewdayLike[3] },
+            { x: 0, y: e.data.viewdayLike[4] },
+            { x: 0, y: e.data.viewdayLike[5] },
+            { x: 0, y: e.data.viewdayLike[6] },
+          ],
+        });
+      })
+      .catch((err) => {
+        console.log("deu erro");
+        setCitiesData({});
+      });
+  }, [dataTrigger]);
 
   const [btn, setBtn] = useState(citiesData);
 
@@ -257,7 +299,7 @@ export default function Dashboard() {
         <div className="flex mt-20">
           <div>
             {/* <SideNavbar /> */}
-            <DataBoxes />
+            <DataBoxes dataTrigger={dataTrigger} setDataTrigger={setDataTrigger} />
             <RateButtons
               citiesData={citiesData}
               hourData={hourData}

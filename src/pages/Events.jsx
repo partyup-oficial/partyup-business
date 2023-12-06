@@ -19,6 +19,7 @@ export default function Events() {
         const getEvents = e.data.results.map((e) => ({
           id: e.Id_App_Events,
           desc: e.desc_event,
+          name: e.Nm_event,
           image: e.Event_image,
         }));
         console.log(e);
@@ -71,18 +72,19 @@ export default function Events() {
 
             className="flex flex-wrap h-[50rem] gap-12 gap-y-0 py-12 overflow-y-scroll custom-scroll">
             {eventData.length > 0 &&
-            eventData.filter((e) => e.desc.includes(applySearch)).length > 0 ? (
+            eventData.filter((e) => e.name.includes(applySearch)).length > 0 ? (
               eventData
-                .filter((e) => e.desc.includes(applySearch))
-                .map((e) => (
+                .filter((e) => e.name.includes(applySearch))
+                .map((e, i) => (
                   <div
+                    key={i}
                     onClick={() =>
-                      navigate("/dashboard", { state: { id: e.id } })
+                      navigate("/dashboard", { state: { id: e.id, name: e.name } })
                     }
                     className="h-[12rem] w-[20rem] cursor-pointer relative group overflow-hidden">
                     <div className="z-10 relative h-full bg-gradient-to-t from-[rgba(0,0,0,0.9)] to-transparent transition duration-1000 ease-in-out hover:!from-[rgb(0,0,0)]">
                       <span className="absolute bottom-0 p-2 text-sm font-medium text-white transition duration-300 ease-in-out group-hover:-translate-y-3">
-                        {e.desc}
+                        {e.name}
                       </span>
                     </div>
                     <img

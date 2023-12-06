@@ -6,8 +6,8 @@ export default function Comments() {
       <div className="flex flex-col gap-12 h-[30rem] overflow-scroll overflow-x-hidden custom-scroll border-t border-purple-800 pt-5">
         {Array(8)
           .fill("")
-          .map(() => (
-            <div className="flex gap-5 px-4">
+          .map((e, i) => (
+            <div key={i} className="flex gap-5 px-4">
               <img src={Foto} width={65} className="m-auto rounded-full" />
               <div className="flex flex-col max-w-[18rem] ">
                 <h1 className="font-bold">Roberta Pereira</h1>
