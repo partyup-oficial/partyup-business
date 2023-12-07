@@ -161,6 +161,9 @@ export default function Dashboard() {
       .get(`http://localhost:3003/dashboardLikeHour/${location.state.id}`)
       .then((e) => {
         console.log(e);
+        if (dataTrigger === "presencas") {
+          
+        }
         setHourData({
           ...hourData,
           data: [
