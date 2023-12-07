@@ -181,7 +181,7 @@ export default function Dashboard() {
     axios
       .get(
         `http://localhost:3003/${
-          dataTrigger === "likes" ? "dashboardDaysLike" : dataTrigger === "presencas" ? "dashboardLikeHour" : "dashboardLikeHour"
+          dataTrigger === "likes" ? "dashboardDaysLike" : dataTrigger === "presencas" ? "dashboardLikeHour" : "dashboardLikecity"
         }/${location.state.id}`
       )
       .then((e) => {
