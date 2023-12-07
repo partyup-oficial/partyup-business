@@ -158,19 +158,36 @@ export default function Dashboard() {
         setWeekData({});
       });
     axios
-      .get(`http://localhost:3003/dashboardDaysLike/${location.state.id}`)
+      .get(`http://localhost:3003/dashboardLikeHour/${location.state.id}`)
       .then((e) => {
         console.log(e);
         setHourData({
           ...hourData,
           data: [
-            { x: 0, y: e.data.viewdayLike[0] },
-            { x: 0, y: e.data.viewdayLike[1] },
-            { x: 0, y: e.data.viewdayLike[2] },
-            { x: 0, y: e.data.viewdayLike[3] },
-            { x: 0, y: e.data.viewdayLike[4] },
-            { x: 0, y: e.data.viewdayLike[5] },
-            { x: 0, y: e.data.viewdayLike[6] },
+            { x: 0, y: e.data.viewHoursLike[0] },
+            { x: 0, y: e.data.viewHoursLike[1] },
+            { x: 0, y: e.data.viewHoursLike[2] },
+            { x: 0, y: e.data.viewHoursLike[3] },
+            { x: 0, y: e.data.viewHoursLike[4] },
+            { x: 0, y: e.data.viewHoursLike[5] },
+            { x: 0, y: e.data.viewHoursLike[6] },
+            { x: 0, y: e.data.viewHoursLike[7] },
+            { x: 0, y: e.data.viewHoursLike[8] },
+            { x: 0, y: e.data.viewHoursLike[9] },
+            { x: 0, y: e.data.viewHoursLike[10] },
+            { x: 0, y: e.data.viewHoursLike[11] },
+            { x: 0, y: e.data.viewHoursLike[12] },
+            { x: 0, y: e.data.viewHoursLike[13] },
+            { x: 0, y: e.data.viewHoursLike[14] },
+            { x: 0, y: e.data.viewHoursLike[15] },
+            { x: 0, y: e.data.viewHoursLike[16] },
+            { x: 0, y: e.data.viewHoursLike[17] },
+            { x: 0, y: e.data.viewHoursLike[18] },
+            { x: 0, y: e.data.viewHoursLike[19] },
+            { x: 0, y: e.data.viewHoursLike[20] },
+            { x: 0, y: e.data.viewHoursLike[21] },
+            { x: 0, y: e.data.viewHoursLike[22] },
+            { x: 0, y: e.data.viewHoursLike[23] },
           ],
         });
       })
@@ -179,23 +196,22 @@ export default function Dashboard() {
         setHourData({});
       });
     axios
-      .get(
-        `http://localhost:3003/${
-          dataTrigger === "likes" ? "dashboardDaysLike" : dataTrigger === "presencas" ? "dashboardLikeHour" : "dashboardLikecity"
-        }/${location.state.id}`
-      )
+      .get(`http://localhost:3003/dashboardLikeCity/${location.state.id}`)
       .then((e) => {
         console.log(e);
         setCitiesData({
           ...citiesData,
           data: [
-            { x: 0, y: e.data.viewdayLike[0] },
-            { x: 0, y: e.data.viewdayLike[1] },
-            { x: 0, y: e.data.viewdayLike[2] },
-            { x: 0, y: e.data.viewdayLike[3] },
-            { x: 0, y: e.data.viewdayLike[4] },
-            { x: 0, y: e.data.viewdayLike[5] },
-            { x: 0, y: e.data.viewdayLike[6] },
+            { x: 0, y: e.data.viewCityLike[0] },
+            { x: 0, y: e.data.viewCityLike[1] },
+            { x: 0, y: e.data.viewCityLike[2] },
+            { x: 0, y: e.data.viewCityLike[3] },
+            { x: 0, y: e.data.viewCityLike[4] },
+            { x: 0, y: e.data.viewCityLike[5] },
+            { x: 0, y: e.data.viewCityLike[6] },
+            { x: 0, y: e.data.viewCityLike[7] },
+            { x: 0, y: e.data.viewCityLike[8] },
+            { x: 0, y: e.data.viewCityLike[9] },
           ],
         });
       })
@@ -299,7 +315,10 @@ export default function Dashboard() {
         <div className="flex mt-20">
           <div>
             {/* <SideNavbar /> */}
-            <DataBoxes dataTrigger={dataTrigger} setDataTrigger={setDataTrigger} />
+            <DataBoxes
+              dataTrigger={dataTrigger}
+              setDataTrigger={setDataTrigger}
+            />
             <RateButtons
               citiesData={citiesData}
               hourData={hourData}

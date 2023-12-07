@@ -70,7 +70,7 @@ export default function Events() {
             //   document.body.style.overflow = "hidden";
             // }}
 
-            className="flex flex-wrap h-[50rem] gap-12 gap-y-0 py-12 overflow-y-scroll custom-scroll">
+            className="flex flex-wrap h-[50rem] gap-12 py-12 overflow-y-scroll custom-scroll">
             {eventData.length > 0 &&
             eventData.filter((e) => e.name.includes(applySearch)).length > 0 ? (
               eventData
