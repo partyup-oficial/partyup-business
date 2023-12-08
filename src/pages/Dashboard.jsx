@@ -25,6 +25,8 @@ export default function Dashboard() {
   const location = useLocation();
   const [eventData, setEventData] = useState({});
   const [dataTrigger, setDataTrigger] = useState("likes");
+  const [option, setOption] = useState("cities");
+  const id_event = location.state.id;
 
   const [citiesData, setCitiesData] = useState({
     labels: [
@@ -131,17 +133,15 @@ export default function Dashboard() {
     ],
     title: "Horários",
   });
-  const [btn, setBtn] = useState(citiesData);
+  const [chart, setChart] = useState(citiesData);
   useEffect(() => {
-    console.log(location.state);
     setEventData({
       name: location.state.name,
     });
     if (dataTrigger === "likes") {
       axios
-        .get(`http://localhost:3003/dashboardDaysLike/${location.state.id}`)
+        .get(`http://localhost:3003/dashboardDaysLike/${id_event}`)
         .then((e) => {
-          console.log(e);
           setWeekData({
             ...weekData,
             data: [
@@ -162,7 +162,6 @@ export default function Dashboard() {
       axios
         .get(`http://localhost:3003/dashboardLikeHour/${location.state.id}`)
         .then((e) => {
-          console.log(e);
           setHourData({
             ...hourData,
             data: [
@@ -200,7 +199,7 @@ export default function Dashboard() {
       axios
         .get(`http://localhost:3003/dashboardLikeCity/${location.state.id}`)
         .then((e) => {
-          console.log(e);
+          // console.log(e);
           setCitiesData({
             ...citiesData,
             data: [
@@ -227,7 +226,7 @@ export default function Dashboard() {
           `http://localhost:3003/dashboardconfirmPresence/${location.state.id}`
         )
         .then((e) => {
-          console.log(e);
+          // console.log(e);
           setWeekData({
             ...weekData,
             data: [
@@ -250,7 +249,7 @@ export default function Dashboard() {
           `http://localhost:3003/dashboardconfirmPresenceHour/${location.state.id}`
         )
         .then((e) => {
-          console.log(e);
+          // console.log(e);
           if (dataTrigger === "presencas") {
           }
           setHourData({
@@ -292,7 +291,7 @@ export default function Dashboard() {
           `http://localhost:3003/dashboardconfirmPresenceCity/${location.state.id}`
         )
         .then((e) => {
-          console.log(e);
+          // console.log(e);
           setCitiesData({
             ...citiesData,
             data: [
@@ -314,7 +313,7 @@ export default function Dashboard() {
           setCitiesData({});
         });
     }
-  }, [dataTrigger]);
+  }, [option, dataTrigger]);
 
   ChartJS.register(
     CategoryScale,
@@ -340,7 +339,7 @@ export default function Dashboard() {
       },
       title: {
         display: true,
-        text: btn.title,
+        text: chart.title,
         font: {
           size: 20,
         },
@@ -371,12 +370,12 @@ export default function Dashboard() {
     },
   };
 
-  const labels = btn.labels;
+  const labels = chart.labels;
   const data = {
     labels,
     datasets: [
       {
-        data: btn.data,
+        data: chart.data,
         backgroundColor: "#F72A8E",
       },
     ],
@@ -411,20 +410,26 @@ export default function Dashboard() {
             <DataBoxes
               dataTrigger={dataTrigger}
               setDataTrigger={setDataTrigger}
+              setChart={setChart}
+              citiesData={citiesData}
+              setOption={setOption}
+              id={id_event}
             />
             <RateButtons
               citiesData={citiesData}
               hourData={hourData}
               weekData={weekData}
-              setBtn={setBtn}
-              btn={btn}
+              setChart={setChart}
+              option={option}
+              setOption={setOption}
+              chart={chart}
             />
             <div className="p-5 bg-black border-2 border-purple-500 bg-opacity-60 rounded-[2rem] mt-6">
               <Bar options={options} data={data} width={700} height={300} />
             </div>
           </div>
           <div className="mt-auto">
-            <Comments />
+            <Comments id={id_event} />
           </div>
         </div>
       </div>
