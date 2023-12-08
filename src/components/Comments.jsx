@@ -31,12 +31,11 @@ export default function Comments(id) {
           !noComments ? (
             comments.map((e, i) => (
               <div key={i} className="flex gap-5 px-4">
-                <img src={Foto} width={65} className="m-auto rounded-full" />
+                <img src={`data:image/png;base64,${e.image}`} width={65} className="m-auto rounded-full" />
                 <div className="flex flex-col max-w-[18rem] w-[20rem]">
                   <h1 className="font-bold">{e.name}</h1>
                   <p className="text-sm break-words">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quaerat, asperiores at deleniti autem similique.
+                    {e.comment}
                   </p>
                 </div>
               </div>

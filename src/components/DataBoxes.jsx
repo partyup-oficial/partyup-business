@@ -12,24 +12,22 @@ export default function DataBoxes({
   setOption,
   id,
 }) {
-  const [count, setCount] = useState({});
+  const [count, setCount] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:3003/likeCount/${id}`).then((e) => {
-      setCount({
+      setCount([{
+        ...count,
         likes: e.data.numberLikes,
-      });
+      }]);
     });
     axios.get(`http://localhost:3003/presenceCount/${id}`).then((e) => {
-      setCount({
-        ...count,
-        presences: 2,
-      });
+      setCount([{...count, presences: 12 }]);
     });
     axios.get(`http://localhost:3003/likeCount/${id}`).then((e) => {
-      setCount({
+      setCount([{
         ...count,
         access: e.data.numberLikes,
-      });
+      }]);
     });
   }, []);
   return (
@@ -39,6 +37,7 @@ export default function DataBoxes({
           setDataTrigger("likes");
           setChart(citiesData);
           setOption("cities");
+          console.log(count);
         }}
         className={`flex flex-col items-center px-6 py-6 bg-black border-2 border-purple-900 w-44 bg-opacity-80 rounded-xl ${
           dataTrigger === "likes" && "!border-pink-700"
