@@ -40,16 +40,16 @@ export default function Dashboard() {
       "Belo Horizonte",
     ],
     data: [
-      { x: 0, y: 185 },
-      { x: 0, y: 32 },
-      { x: 0, y: 109 },
-      { x: 0, y: 109 },
-      { x: 0, y: 159 },
-      { x: 0, y: 309 },
-      { x: 0, y: 109 },
-      { x: 0, y: 32 },
-      { x: 0, y: 109 },
-      { x: 0, y: 10 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
     ],
     title: "Cidades",
   });
@@ -65,13 +65,13 @@ export default function Dashboard() {
       "Domingo",
     ],
     data: [
-      { x: 0, y: 185 },
-      { x: 0, y: 32 },
-      { x: 0, y: 9 },
-      { x: 0, y: 149 },
-      { x: 0, y: 19 },
-      { x: 0, y: 139 },
-      { x: 0, y: 109 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
     ],
     title: "Dias da semana",
   });
@@ -104,127 +104,217 @@ export default function Dashboard() {
       "23:00",
     ],
     data: [
-      { x: 0, y: 185 },
-      { x: 0, y: 32 },
-      { x: 0, y: 109 },
-      { x: 0, y: 75 },
-      { x: 0, y: 194 },
-      { x: 0, y: 121 },
-      { x: 0, y: 56 },
-      { x: 0, y: 167 },
-      { x: 0, y: 88 },
-      { x: 0, y: 45 },
-      { x: 0, y: 199 },
-      { x: 0, y: 102 },
-      { x: 0, y: 83 },
-      { x: 0, y: 150 },
-      { x: 0, y: 12 },
-      { x: 0, y: 176 },
-      { x: 0, y: 68 },
-      { x: 0, y: 99 },
-      { x: 0, y: 154 },
-      { x: 0, y: 37 },
-      { x: 0, y: 123 },
-      { x: 0, y: 88 },
-      { x: 0, y: 190 },
-      { x: 0, y: 57 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
     ],
     title: "Horários",
   });
+  const [btn, setBtn] = useState(citiesData);
   useEffect(() => {
     console.log(location.state);
     setEventData({
       name: location.state.name,
     });
-    axios
-      .get(`http://localhost:3003/dashboardDaysLike/${location.state.id}`)
-      .then((e) => {
-        console.log(e);
-        setWeekData({
-          ...weekData,
-          data: [
-            { x: 0, y: e.data.viewdayLike[0] },
-            { x: 0, y: e.data.viewdayLike[1] },
-            { x: 0, y: e.data.viewdayLike[2] },
-            { x: 0, y: e.data.viewdayLike[3] },
-            { x: 0, y: e.data.viewdayLike[4] },
-            { x: 0, y: e.data.viewdayLike[5] },
-            { x: 0, y: e.data.viewdayLike[6] },
-          ],
+    if (dataTrigger === "likes") {
+      axios
+        .get(`http://localhost:3003/dashboardDaysLike/${location.state.id}`)
+        .then((e) => {
+          console.log(e);
+          setWeekData({
+            ...weekData,
+            data: [
+              { x: 0, y: e.data.viewdayLike[0] },
+              { x: 0, y: e.data.viewdayLike[1] },
+              { x: 0, y: e.data.viewdayLike[2] },
+              { x: 0, y: e.data.viewdayLike[3] },
+              { x: 0, y: e.data.viewdayLike[4] },
+              { x: 0, y: e.data.viewdayLike[5] },
+              { x: 0, y: e.data.viewdayLike[6] },
+            ],
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          setWeekData({});
         });
-      })
-      .catch((err) => {
-        console.log(err);
-        setWeekData({});
-      });
-    axios
-      .get(`http://localhost:3003/dashboardLikeHour/${location.state.id}`)
-      .then((e) => {
-        console.log(e);
-        if (dataTrigger === "presencas") {
-          
-        }
-        setHourData({
-          ...hourData,
-          data: [
-            { x: 0, y: e.data.viewHoursLike[0] },
-            { x: 0, y: e.data.viewHoursLike[1] },
-            { x: 0, y: e.data.viewHoursLike[2] },
-            { x: 0, y: e.data.viewHoursLike[3] },
-            { x: 0, y: e.data.viewHoursLike[4] },
-            { x: 0, y: e.data.viewHoursLike[5] },
-            { x: 0, y: e.data.viewHoursLike[6] },
-            { x: 0, y: e.data.viewHoursLike[7] },
-            { x: 0, y: e.data.viewHoursLike[8] },
-            { x: 0, y: e.data.viewHoursLike[9] },
-            { x: 0, y: e.data.viewHoursLike[10] },
-            { x: 0, y: e.data.viewHoursLike[11] },
-            { x: 0, y: e.data.viewHoursLike[12] },
-            { x: 0, y: e.data.viewHoursLike[13] },
-            { x: 0, y: e.data.viewHoursLike[14] },
-            { x: 0, y: e.data.viewHoursLike[15] },
-            { x: 0, y: e.data.viewHoursLike[16] },
-            { x: 0, y: e.data.viewHoursLike[17] },
-            { x: 0, y: e.data.viewHoursLike[18] },
-            { x: 0, y: e.data.viewHoursLike[19] },
-            { x: 0, y: e.data.viewHoursLike[20] },
-            { x: 0, y: e.data.viewHoursLike[21] },
-            { x: 0, y: e.data.viewHoursLike[22] },
-            { x: 0, y: e.data.viewHoursLike[23] },
-          ],
+      axios
+        .get(`http://localhost:3003/dashboardLikeHour/${location.state.id}`)
+        .then((e) => {
+          console.log(e);
+          setHourData({
+            ...hourData,
+            data: [
+              { x: 0, y: e.data.viewHoursLike[0] },
+              { x: 0, y: e.data.viewHoursLike[1] },
+              { x: 0, y: e.data.viewHoursLike[2] },
+              { x: 0, y: e.data.viewHoursLike[3] },
+              { x: 0, y: e.data.viewHoursLike[4] },
+              { x: 0, y: e.data.viewHoursLike[5] },
+              { x: 0, y: e.data.viewHoursLike[6] },
+              { x: 0, y: e.data.viewHoursLike[7] },
+              { x: 0, y: e.data.viewHoursLike[8] },
+              { x: 0, y: e.data.viewHoursLike[9] },
+              { x: 0, y: e.data.viewHoursLike[10] },
+              { x: 0, y: e.data.viewHoursLike[11] },
+              { x: 0, y: e.data.viewHoursLike[12] },
+              { x: 0, y: e.data.viewHoursLike[13] },
+              { x: 0, y: e.data.viewHoursLike[14] },
+              { x: 0, y: e.data.viewHoursLike[15] },
+              { x: 0, y: e.data.viewHoursLike[16] },
+              { x: 0, y: e.data.viewHoursLike[17] },
+              { x: 0, y: e.data.viewHoursLike[18] },
+              { x: 0, y: e.data.viewHoursLike[19] },
+              { x: 0, y: e.data.viewHoursLike[20] },
+              { x: 0, y: e.data.viewHoursLike[21] },
+              { x: 0, y: e.data.viewHoursLike[22] },
+              { x: 0, y: e.data.viewHoursLike[23] },
+            ],
+          });
+        })
+        .catch((err) => {
+          console.log("deu erro");
+          setHourData({});
         });
-      })
-      .catch((err) => {
-        console.log("deu erro");
-        setHourData({});
-      });
-    axios
-      .get(`http://localhost:3003/dashboardLikeCity/${location.state.id}`)
-      .then((e) => {
-        console.log(e);
-        setCitiesData({
-          ...citiesData,
-          data: [
-            { x: 0, y: e.data.viewCityLike[0] },
-            { x: 0, y: e.data.viewCityLike[1] },
-            { x: 0, y: e.data.viewCityLike[2] },
-            { x: 0, y: e.data.viewCityLike[3] },
-            { x: 0, y: e.data.viewCityLike[4] },
-            { x: 0, y: e.data.viewCityLike[5] },
-            { x: 0, y: e.data.viewCityLike[6] },
-            { x: 0, y: e.data.viewCityLike[7] },
-            { x: 0, y: e.data.viewCityLike[8] },
-            { x: 0, y: e.data.viewCityLike[9] },
-          ],
+      axios
+        .get(`http://localhost:3003/dashboardLikeCity/${location.state.id}`)
+        .then((e) => {
+          console.log(e);
+          setCitiesData({
+            ...citiesData,
+            data: [
+              { x: 0, y: e.data.viewCityLike[0] },
+              { x: 0, y: e.data.viewCityLike[1] },
+              { x: 0, y: e.data.viewCityLike[2] },
+              { x: 0, y: e.data.viewCityLike[3] },
+              { x: 0, y: e.data.viewCityLike[4] },
+              { x: 0, y: e.data.viewCityLike[5] },
+              { x: 0, y: e.data.viewCityLike[6] },
+              { x: 0, y: e.data.viewCityLike[7] },
+              { x: 0, y: e.data.viewCityLike[8] },
+              { x: 0, y: e.data.viewCityLike[9] },
+            ],
+          });
+        })
+        .catch((err) => {
+          console.log("deu erro");
+          setCitiesData({});
         });
-      })
-      .catch((err) => {
-        console.log("deu erro");
-        setCitiesData({});
-      });
+    } else {
+      axios
+        .get(
+          `http://localhost:3003/dashboardconfirmPresence/${location.state.id}`
+        )
+        .then((e) => {
+          console.log(e);
+          setWeekData({
+            ...weekData,
+            data: [
+              { x: 0, y: e.data.viewdaysconfirm[0] },
+              { x: 0, y: e.data.viewdaysconfirm[1] },
+              { x: 0, y: e.data.viewdaysconfirm[2] },
+              { x: 0, y: e.data.viewdaysconfirm[3] },
+              { x: 0, y: e.data.viewdaysconfirm[4] },
+              { x: 0, y: e.data.viewdaysconfirm[5] },
+              { x: 0, y: e.data.viewdaysconfirm[6] },
+            ],
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          setWeekData({});
+        });
+      axios
+        .get(
+          `http://localhost:3003/dashboardconfirmPresenceHour/${location.state.id}`
+        )
+        .then((e) => {
+          console.log(e);
+          if (dataTrigger === "presencas") {
+          }
+          setHourData({
+            ...hourData,
+            data: [
+              { x: 0, y: e.data.viewHoursConfirm[0] },
+              { x: 0, y: e.data.viewHoursConfirm[1] },
+              { x: 0, y: e.data.viewHoursConfirm[2] },
+              { x: 0, y: e.data.viewHoursConfirm[3] },
+              { x: 0, y: e.data.viewHoursConfirm[4] },
+              { x: 0, y: e.data.viewHoursConfirm[5] },
+              { x: 0, y: e.data.viewHoursConfirm[6] },
+              { x: 0, y: e.data.viewHoursConfirm[7] },
+              { x: 0, y: e.data.viewHoursConfirm[8] },
+              { x: 0, y: e.data.viewHoursConfirm[9] },
+              { x: 0, y: e.data.viewHoursConfirm[10] },
+              { x: 0, y: e.data.viewHoursConfirm[11] },
+              { x: 0, y: e.data.viewHoursConfirm[12] },
+              { x: 0, y: e.data.viewHoursConfirm[13] },
+              { x: 0, y: e.data.viewHoursConfirm[14] },
+              { x: 0, y: e.data.viewHoursConfirm[15] },
+              { x: 0, y: e.data.viewHoursConfirm[16] },
+              { x: 0, y: e.data.viewHoursConfirm[17] },
+              { x: 0, y: e.data.viewHoursConfirm[18] },
+              { x: 0, y: e.data.viewHoursConfirm[19] },
+              { x: 0, y: e.data.viewHoursConfirm[20] },
+              { x: 0, y: e.data.viewHoursConfirm[21] },
+              { x: 0, y: e.data.viewHoursConfirm[22] },
+              { x: 0, y: e.data.viewHoursConfirm[23] },
+            ],
+          });
+        })
+        .catch((err) => {
+          console.log("deu erro");
+          setHourData({});
+        });
+      axios
+        .get(
+          `http://localhost:3003/dashboardconfirmPresenceCity/${location.state.id}`
+        )
+        .then((e) => {
+          console.log(e);
+          setCitiesData({
+            ...citiesData,
+            data: [
+              { x: 0, y: e.data.viewCityConfirm[0] },
+              { x: 0, y: e.data.viewCityConfirm[1] },
+              { x: 0, y: e.data.viewCityConfirm[2] },
+              { x: 0, y: 18 },
+              { x: 0, y: e.data.viewCityConfirm[4] },
+              { x: 0, y: e.data.viewCityConfirm[5] },
+              { x: 0, y: e.data.viewCityConfirm[6] },
+              { x: 0, y: e.data.viewCityConfirm[7] },
+              { x: 0, y: e.data.viewCityConfirm[8] },
+              { x: 0, y: e.data.viewCityConfirm[9] },
+            ],
+          });
+        })
+        .catch((err) => {
+          console.log("deu erro");
+          setCitiesData({});
+        });
+    }
   }, [dataTrigger]);
-
-  const [btn, setBtn] = useState(citiesData);
 
   ChartJS.register(
     CategoryScale,
@@ -303,9 +393,9 @@ export default function Dashboard() {
           <GoGear size={30} color="#E579FF" />
         </div>
         <img
-          src={Foto}
-          width={150}
-          className="absolute rounded-full right-36 top-8"
+          src={`data:image/png;base64,${localStorage.getItem("user_image")}`}
+          width={130}
+          className="absolute rounded-full right-36 top-6"
         />
         <div className="flex items-center">
           <FaCalendarAlt size={30} color="#E579FF" />

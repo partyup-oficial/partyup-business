@@ -9,7 +9,12 @@ export default function SideNavbar({ setSelectedEvents, selectedEvents }) {
   return (
     <div className="fixed z-10 left-0 min-h-screen bg-[#4c0b38] border-r-2 border-purple-800 rounded-tr-[4rem] rounded-br-[4rem]">
       <div className="flex flex-col items-center py-4">
-        <img src={Foto} alt="foto" width={130} className="rounded-full" />
+        <img
+          src={`data:image/png;base64,${localStorage.getItem("user_image")}`}
+          alt="foto"
+          width={130}
+          className="rounded-full"
+        />
         <div className="text-xl text-[#FFC896]">
           <div className="flex flex-col mt-6 border-t border-purple-500">
             <button

@@ -10,7 +10,7 @@ export default function RateButtons({
       <button
         onClick={() => setBtn(citiesData)}
         className={`${
-          btn === citiesData
+          btn == citiesData
             ? "!bg-[#a32ea5]"
             : "bg-[#611f62] border border-[#E579FF]"
         } rounded-3xl px-8 py-2 hover:bg-[#611f62] transition-colors`}>

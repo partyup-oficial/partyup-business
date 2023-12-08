@@ -22,6 +22,7 @@ export default function Login() {
       })
       .then((e) => {
         console.log(e);
+        localStorage.setItem("user_image", e.data.results[0].User_image);
         navigate("/eventos");
       })
       .catch((err) => {
