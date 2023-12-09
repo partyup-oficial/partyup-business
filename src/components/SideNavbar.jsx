@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import Foto from "../assets/images/foto.png";
 import { FaRegCalendarCheck } from "react-icons/fa";
+import { HiMiniArrowLeftOnRectangle } from "react-icons/hi2";
 import { TbCalendarCancel, TbCalendarUser } from "react-icons/tb";
 import { MdEditCalendar } from "react-icons/md";
 
@@ -8,7 +9,10 @@ export default function SideNavbar({ setSelectedEvents, selectedEvents }) {
   const navigate = useNavigate();
   return (
     <div className="fixed z-10 left-0 min-h-screen bg-[#4c0b38] border-r-2 border-purple-800 rounded-tr-[4rem] rounded-br-[4rem]">
-      <div className="flex flex-col items-center py-4">
+      <div className="relative flex flex-col items-center">
+        <button onClick={() => navigate("/")} className="absolute left-0 p-3">
+          <HiMiniArrowLeftOnRectangle size={35} color="#C864E0" />
+        </button>
         <img
           src={`data:image/png;base64,${localStorage.getItem("user_image")}`}
           alt="foto"

@@ -221,99 +221,183 @@ export default function Dashboard() {
           setCitiesData({});
         });
     } else {
-      axios
-        .get(
-          `http://localhost:3003/dashboardconfirmPresence/${location.state.id}`
-        )
-        .then((e) => {
-          // console.log(e);
-          setWeekData({
-            ...weekData,
-            data: [
-              { x: 0, y: e.data.viewdaysconfirm[0] },
-              { x: 0, y: e.data.viewdaysconfirm[1] },
-              { x: 0, y: e.data.viewdaysconfirm[2] },
-              { x: 0, y: e.data.viewdaysconfirm[3] },
-              { x: 0, y: e.data.viewdaysconfirm[4] },
-              { x: 0, y: e.data.viewdaysconfirm[5] },
-              { x: 0, y: e.data.viewdaysconfirm[6] },
-            ],
+      if (dataTrigger === "presencas") {
+        axios
+          .get(
+            `http://localhost:3003/dashboardconfirmPresence/${location.state.id}`
+          )
+          .then((e) => {
+            // console.log(e);
+            setWeekData({
+              ...weekData,
+              data: [
+                { x: 0, y: e.data.viewdaysconfirm[0] },
+                { x: 0, y: e.data.viewdaysconfirm[1] },
+                { x: 0, y: e.data.viewdaysconfirm[2] },
+                { x: 0, y: e.data.viewdaysconfirm[3] },
+                { x: 0, y: e.data.viewdaysconfirm[4] },
+                { x: 0, y: e.data.viewdaysconfirm[5] },
+                { x: 0, y: e.data.viewdaysconfirm[6] },
+              ],
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            setWeekData({});
           });
-        })
-        .catch((err) => {
-          console.log(err);
-          setWeekData({});
-        });
-      axios
-        .get(
-          `http://localhost:3003/dashboardconfirmPresenceHour/${location.state.id}`
-        )
-        .then((e) => {
-          // console.log(e);
-          if (dataTrigger === "presencas") {
-          }
-          setHourData({
-            ...hourData,
-            data: [
-              { x: 0, y: e.data.viewHoursConfirm[0] },
-              { x: 0, y: e.data.viewHoursConfirm[1] },
-              { x: 0, y: e.data.viewHoursConfirm[2] },
-              { x: 0, y: e.data.viewHoursConfirm[3] },
-              { x: 0, y: e.data.viewHoursConfirm[4] },
-              { x: 0, y: e.data.viewHoursConfirm[5] },
-              { x: 0, y: e.data.viewHoursConfirm[6] },
-              { x: 0, y: e.data.viewHoursConfirm[7] },
-              { x: 0, y: e.data.viewHoursConfirm[8] },
-              { x: 0, y: e.data.viewHoursConfirm[9] },
-              { x: 0, y: e.data.viewHoursConfirm[10] },
-              { x: 0, y: e.data.viewHoursConfirm[11] },
-              { x: 0, y: e.data.viewHoursConfirm[12] },
-              { x: 0, y: e.data.viewHoursConfirm[13] },
-              { x: 0, y: e.data.viewHoursConfirm[14] },
-              { x: 0, y: e.data.viewHoursConfirm[15] },
-              { x: 0, y: e.data.viewHoursConfirm[16] },
-              { x: 0, y: e.data.viewHoursConfirm[17] },
-              { x: 0, y: e.data.viewHoursConfirm[18] },
-              { x: 0, y: e.data.viewHoursConfirm[19] },
-              { x: 0, y: e.data.viewHoursConfirm[20] },
-              { x: 0, y: e.data.viewHoursConfirm[21] },
-              { x: 0, y: e.data.viewHoursConfirm[22] },
-              { x: 0, y: e.data.viewHoursConfirm[23] },
-            ],
+        axios
+          .get(
+            `http://localhost:3003/dashboardconfirmPresenceHour/${location.state.id}`
+          )
+          .then((e) => {
+            // console.log(e);
+            setHourData({
+              ...hourData,
+              data: [
+                { x: 0, y: e.data.viewHoursConfirm[0] },
+                { x: 0, y: e.data.viewHoursConfirm[1] },
+                { x: 0, y: e.data.viewHoursConfirm[2] },
+                { x: 0, y: e.data.viewHoursConfirm[3] },
+                { x: 0, y: e.data.viewHoursConfirm[4] },
+                { x: 0, y: e.data.viewHoursConfirm[5] },
+                { x: 0, y: e.data.viewHoursConfirm[6] },
+                { x: 0, y: e.data.viewHoursConfirm[7] },
+                { x: 0, y: e.data.viewHoursConfirm[8] },
+                { x: 0, y: e.data.viewHoursConfirm[9] },
+                { x: 0, y: e.data.viewHoursConfirm[10] },
+                { x: 0, y: e.data.viewHoursConfirm[11] },
+                { x: 0, y: e.data.viewHoursConfirm[12] },
+                { x: 0, y: e.data.viewHoursConfirm[13] },
+                { x: 0, y: e.data.viewHoursConfirm[14] },
+                { x: 0, y: e.data.viewHoursConfirm[15] },
+                { x: 0, y: e.data.viewHoursConfirm[16] },
+                { x: 0, y: e.data.viewHoursConfirm[17] },
+                { x: 0, y: e.data.viewHoursConfirm[18] },
+                { x: 0, y: e.data.viewHoursConfirm[19] },
+                { x: 0, y: e.data.viewHoursConfirm[20] },
+                { x: 0, y: e.data.viewHoursConfirm[21] },
+                { x: 0, y: e.data.viewHoursConfirm[22] },
+                { x: 0, y: e.data.viewHoursConfirm[23] },
+              ],
+            });
+          })
+          .catch((err) => {
+            console.log("deu erro");
+            setHourData({});
           });
-        })
-        .catch((err) => {
-          console.log("deu erro");
-          setHourData({});
-        });
-      axios
-        .get(
-          `http://localhost:3003/dashboardconfirmPresenceCity/${location.state.id}`
-        )
-        .then((e) => {
-          // console.log(e);
-          setCitiesData({
-            ...citiesData,
-            data: [
-              { x: 0, y: e.data.viewCityConfirm[0] },
-              { x: 0, y: e.data.viewCityConfirm[1] },
-              { x: 0, y: e.data.viewCityConfirm[2] },
-              { x: 0, y: 18 },
-              { x: 0, y: e.data.viewCityConfirm[4] },
-              { x: 0, y: e.data.viewCityConfirm[5] },
-              { x: 0, y: e.data.viewCityConfirm[6] },
-              { x: 0, y: e.data.viewCityConfirm[7] },
-              { x: 0, y: e.data.viewCityConfirm[8] },
-              { x: 0, y: e.data.viewCityConfirm[9] },
-            ],
+        axios
+          .get(
+            `http://localhost:3003/dashboardconfirmPresenceCity/${location.state.id}`
+          )
+          .then((e) => {
+            // console.log(e);
+            setCitiesData({
+              ...citiesData,
+              data: [
+                { x: 0, y: e.data.viewCityConfirm[0] },
+                { x: 0, y: e.data.viewCityConfirm[1] },
+                { x: 0, y: e.data.viewCityConfirm[2] },
+                { x: 0, y: 18 },
+                { x: 0, y: e.data.viewCityConfirm[4] },
+                { x: 0, y: e.data.viewCityConfirm[5] },
+                { x: 0, y: e.data.viewCityConfirm[6] },
+                { x: 0, y: e.data.viewCityConfirm[7] },
+                { x: 0, y: e.data.viewCityConfirm[8] },
+                { x: 0, y: e.data.viewCityConfirm[9] },
+              ],
+            });
+          })
+          .catch((err) => {
+            console.log("deu erro");
+            setCitiesData({});
           });
-        })
-        .catch((err) => {
-          console.log("deu erro");
-          setCitiesData({});
-        });
+      } else {
+        axios
+          .get(`http://localhost:3003/dashboardAcessHour/${location.state.id}`)
+          .then((e) => {
+            // console.log(e);
+            setWeekData({
+              ...weekData,
+              data: [
+                { x: 0, y: e.data.viewdaysconfirm[0] },
+                { x: 0, y: e.data.viewdaysconfirm[1] },
+                { x: 0, y: e.data.viewdaysconfirm[2] },
+                { x: 0, y: e.data.viewdaysconfirm[3] },
+                { x: 0, y: e.data.viewdaysconfirm[4] },
+                { x: 0, y: e.data.viewdaysconfirm[5] },
+                { x: 0, y: e.data.viewdaysconfirm[6] },
+              ],
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            setWeekData({});
+          });
+        axios
+          .get(`http://localhost:3003/dashboardAcessHour/${location.state.id}`)
+          .then((e) => {
+            // console.log(e);
+            setHourData({
+              ...hourData,
+              data: [
+                { x: 0, y: e.data.viewHoursAcess[0] },
+                { x: 0, y: e.data.viewHoursAcess[1] },
+                { x: 0, y: e.data.viewHoursAcess[2] },
+                { x: 0, y: e.data.viewHoursAcess[3] },
+                { x: 0, y: e.data.viewHoursAcess[4] },
+                { x: 0, y: e.data.viewHoursAcess[5] },
+                { x: 0, y: e.data.viewHoursAcess[6] },
+                { x: 0, y: e.data.viewHoursAcess[7] },
+                { x: 0, y: e.data.viewHoursAcess[8] },
+                { x: 0, y: e.data.viewHoursAcess[9] },
+                { x: 0, y: e.data.viewHoursAcess[10] },
+                { x: 0, y: e.data.viewHoursAcess[11] },
+                { x: 0, y: e.data.viewHoursAcess[12] },
+                { x: 0, y: e.data.viewHoursAcess[13] },
+                { x: 0, y: e.data.viewHoursAcess[14] },
+                { x: 0, y: e.data.viewHoursAcess[15] },
+                { x: 0, y: e.data.viewHoursAcess[16] },
+                { x: 0, y: e.data.viewHoursAcess[17] },
+                { x: 0, y: e.data.viewHoursAcess[18] },
+                { x: 0, y: e.data.viewHoursAcess[19] },
+                { x: 0, y: e.data.viewHoursAcess[20] },
+                { x: 0, y: e.data.viewHoursAcess[21] },
+                { x: 0, y: e.data.viewHoursAcess[22] },
+                { x: 0, y: e.data.viewHoursAcess[23] },
+              ],
+            });
+          })
+          .catch((err) => {
+            console.log("deu erro");
+            setHourData({});
+          });
+        axios
+          .get(`http://localhost:3003/dashboardAcessCity/${location.state.id}`)
+          .then((e) => {
+            // console.log(e);
+            setCitiesData({
+              ...citiesData,
+              data: [
+                { x: 0, y: e.data.viewCityAcess[0] },
+                { x: 0, y: e.data.viewCityAcess[1] },
+                { x: 0, y: e.data.viewCityAcess[2] },
+                { x: 0, y: e.data.viewCityAcess[3] },
+                { x: 0, y: e.data.viewCityAcess[4] },
+                { x: 0, y: e.data.viewCityAcess[5] },
+                { x: 0, y: e.data.viewCityAcess[6] },
+                { x: 0, y: e.data.viewCityAcess[7] },
+                { x: 0, y: e.data.viewCityAcess[8] },
+                { x: 0, y: e.data.viewCityAcess[9] },
+              ],
+            });
+          })
+          .catch((err) => {
+            console.log("deu erro");
+            setCitiesData({});
+          });
+      }
     }
-  }, [option, dataTrigger]);
+  }, [dataTrigger]);
 
   ChartJS.register(
     CategoryScale,

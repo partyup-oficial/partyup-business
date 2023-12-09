@@ -15,14 +15,12 @@ export default function Events() {
     axios
       .get("http://localhost:3003/viewEventsProgress")
       .then((e) => {
-        console.log(e);
         const getEvents = e.data.results.map((e) => ({
           id: e.Id_App_Events,
           desc: e.desc_event,
           name: e.Nm_event,
           image: e.Event_image,
         }));
-        console.log(e);
         setEventData(getEvents);
       })
       .catch((err) => {
@@ -79,7 +77,9 @@ export default function Events() {
                   <div
                     key={i}
                     onClick={() =>
-                      navigate("/dashboard", { state: { id: e.id, name: e.name } })
+                      navigate("/dashboard", {
+                        state: { id: e.id, name: e.name },
+                      })
                     }
                     className="h-[12rem] w-[20rem] cursor-pointer relative group overflow-hidden">
                     <div className="z-10 relative h-full bg-gradient-to-t from-[rgba(0,0,0,0.9)] to-transparent transition duration-1000 ease-in-out hover:!from-[rgb(0,0,0)]">

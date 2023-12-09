@@ -8,7 +8,6 @@ export default function Comments(id) {
     axios
       .get(`http://localhost:3003/viewComment/${id.id}`)
       .then((e) => {
-        console.log(e);
         const getComments = e.data.results.map((e) => ({
           comment: e.Info_content,
           image: e.User_image,
@@ -31,19 +30,21 @@ export default function Comments(id) {
           !noComments ? (
             comments.map((e, i) => (
               <div key={i} className="flex gap-5 px-4">
-                <img src={`data:image/png;base64,${e.image}`} width={65} className="m-auto rounded-full" />
+                <img
+                  src={`data:image/png;base64,${e.image}`}
+                  width={65}
+                  className="m-auto rounded-full"
+                />
                 <div className="flex flex-col max-w-[18rem] w-[20rem]">
                   <h1 className="font-bold">{e.name}</h1>
-                  <p className="text-sm break-words">
-                    {e.comment}
-                  </p>
+                  <p className="text-sm break-words">{e.comment}</p>
                 </div>
               </div>
             ))
           ) : (
             <div className="flex gap-5 px-4">
               <div className="flex flex-col max-w-[18rem] w-[20rem]">
-                <p className="text-lg break-words m-auto">
+                <p className="m-auto text-lg break-words">
                   Nenhum comentário realizado.
                 </p>
               </div>
