@@ -12,6 +12,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const [invalid, setInvalid] = useState(false);
+  const [isPremium, setIsPremium] = useState(null);
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -22,11 +23,25 @@ export default function Login() {
       })
       .then((e) => {
         console.log(e);
-        localStorage.setItem("user_image", e.data.results[0].User_image);
-        navigate("/eventos");
+        axios
+          .get(
+            `http://localhost:3003/dashboardValidateLogin/${e.data.results[0].Id_user}`
+          )
+          .then((f) => {
+            if (!f.data.loginDashboard) {
+              setIsPremium(false);
+              setInvalid(false);
+            } else {
+              setIsPremium(true);
+              localStorage.setItem("user_image", e.data.results[0].User_image);
+              localStorage.setItem("id_user", e.data.results[0].Id_user);
+              navigate("/eventos");
+            }
+          });
       })
       .catch((err) => {
         console.log(err);
+        setIsPremium(true);
         setInvalid(true);
       })
       .finally(() => {
@@ -83,6 +98,11 @@ export default function Login() {
           {invalid && (
             <span className="-mt-6 text-2xl text-red-700">
               E-mail ou senha incorretos.
+            </span>
+          )}
+          {isPremium === false && (
+            <span className="-mt-6 text-2xl text-red-700">
+              Usuário não é premium
             </span>
           )}
         </form>

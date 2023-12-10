@@ -7,6 +7,7 @@
 * {
   outline: none;
   background: url("../assets/images/foto.png");
+  scroll-behavior: smooth;
   /* border: 1px solid red; */
 }
 

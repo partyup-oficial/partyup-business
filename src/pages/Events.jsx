@@ -10,10 +10,12 @@ export default function Events() {
   const [eventData, setEventData] = useState([]);
   const [search, setSearch] = useState("");
   const [applySearch, setApplySearch] = useState("");
+  const [event, setEvent] = useState("viewEventsProgress");
+  const idUser = localStorage.getItem("id_user");
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:3003/viewEventsProgress")
+      .get(`http://localhost:3003/${event}/${idUser}`)
       .then((e) => {
         const getEvents = e.data.results.map((e) => ({
           id: e.Id_App_Events,
@@ -27,13 +29,15 @@ export default function Events() {
         console.log(err);
         setEventData([]);
       });
-  }, []);
+  }, [event]);
   return (
     <main className="bg-[url('./assets/images/partyup-background.png')] bg-cover bg-no-repeat">
       <div className="bg-black bg-opacity-60">
         <SideNavbar
           setSelectedEvents={setSelectedEvents}
           selectedEvents={selectedEvents}
+          event={event}
+          setEvent={setEvent}
         />
         <div className="ml-[28rem] pt-12 min-h-screen">
           <div className="flex items-center justify-between pb-6 pr-16">

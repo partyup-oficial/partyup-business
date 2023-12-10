@@ -133,7 +133,9 @@ export default function Dashboard() {
     ],
     title: "Horários",
   });
+
   const [chart, setChart] = useState(citiesData);
+
   useEffect(() => {
     setEventData({
       name: location.state.name,
@@ -313,19 +315,19 @@ export default function Dashboard() {
           });
       } else {
         axios
-          .get(`http://localhost:3003/dashboardAcessHour/${location.state.id}`)
+          .get(`http://localhost:3003/dashboardDaysAcess/${location.state.id}`)
           .then((e) => {
             // console.log(e);
             setWeekData({
               ...weekData,
               data: [
-                { x: 0, y: e.data.viewdaysconfirm[0] },
-                { x: 0, y: e.data.viewdaysconfirm[1] },
-                { x: 0, y: e.data.viewdaysconfirm[2] },
-                { x: 0, y: e.data.viewdaysconfirm[3] },
-                { x: 0, y: e.data.viewdaysconfirm[4] },
-                { x: 0, y: e.data.viewdaysconfirm[5] },
-                { x: 0, y: e.data.viewdaysconfirm[6] },
+                { x: 0, y: e.data.viewdayAcess[0] },
+                { x: 0, y: e.data.viewdayAcess[1] },
+                { x: 0, y: e.data.viewdayAcess[2] },
+                { x: 0, y: e.data.viewdayAcess[3] },
+                { x: 0, y: e.data.viewdayAcess[4] },
+                { x: 0, y: e.data.viewdayAcess[5] },
+                { x: 0, y: e.data.viewdayAcess[6] },
               ],
             });
           })

@@ -33,7 +33,7 @@ export default function Comments(id) {
                 <img
                   src={`data:image/png;base64,${e.image}`}
                   width={65}
-                  className="m-auto rounded-full"
+                  className="self-center m-auto rounded-full h-[65px]"
                 />
                 <div className="flex flex-col max-w-[18rem] w-[20rem]">
                   <h1 className="font-bold">{e.name}</h1>
