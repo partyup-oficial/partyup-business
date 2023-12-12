@@ -31,8 +31,8 @@ export default function Login() {
               setInvalid(false);
             } else {
               setIsPremium(true);
-              localStorage.setItem("user_image", e.data.User_image);
-              localStorage.setItem("id_user", e.data.Id_user);
+              localStorage.setItem("user_image", e.data.userImage);
+              localStorage.setItem("id_user", e.data.id);
               navigate("/eventos");
             }
           });
