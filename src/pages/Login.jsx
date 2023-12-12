@@ -24,17 +24,15 @@ export default function Login() {
       .then((e) => {
         console.log(e);
         axios
-          .get(
-            `http://localhost:3003/dashboardValidateLogin/${e.data.results[0].Id_user}`
-          )
+          .get(`http://localhost:3003/dashboardValidateLogin/${e.data.id}`)
           .then((f) => {
             if (!f.data.loginDashboard) {
               setIsPremium(false);
               setInvalid(false);
             } else {
               setIsPremium(true);
-              localStorage.setItem("user_image", e.data.results[0].User_image);
-              localStorage.setItem("id_user", e.data.results[0].Id_user);
+              localStorage.setItem("user_image", e.data.User_image);
+              localStorage.setItem("id_user", e.data.Id_user);
               navigate("/eventos");
             }
           });
